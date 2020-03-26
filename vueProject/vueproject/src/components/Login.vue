@@ -1,13 +1,5 @@
 <template>
   <div class="login-container">
-    二维码信息：{{input1}}
-    <el-input
-      placeholder="请输入内容"
-      type="textarea"
-      @keydown.native.enter="changeData"
-      v-focus
-      v-model="input1">
-    </el-input>
       <el-form label-position="left"
       label-width="0px"
       status-icon>
@@ -30,6 +22,7 @@
         </el-form-item>
         <el-form-item style="width: 100%">
           <el-button type="primary" @click.native.prevent="login" style="width: 100%">登录</el-button>
+          <el-button type="primary" @click.native.prevent="register" style="width: 100%; margin-top: 30px">注册</el-button>
         </el-form-item>
       </el-form>
   </div>
@@ -47,30 +40,8 @@ export default {
     }
   },
   created () {
-    this.changfouce()
-  },
-  directives: {
-    focus: {
-      inserted: function (el) {
-        el.children[0].focus()
-      }
-    }
   },
   methods: {
-    changfouce () {
-      this.$nextTick((x) => { // 正确写法
-        this.$refs.inputs.focus()
-      })
-    },
-    changeData () {
-      debugger
-      console.log(this.input1)
-      let input2 = this.input1.split(';')
-      for (let i = 0; i < input2.length; i++) {
-        console.log(input2[i])
-      }
-      this.input1 = ''
-    },
     login () {
       var params = {
         userName: this.username,
@@ -81,6 +52,16 @@ export default {
         console.log(res)
       }).catch(function (e) {
         console.log(e)
+      })
+    },
+    register () {
+      let params = {
+        username: this.username,
+        password: this.password
+      }
+      debugger
+      axios.post('http://localhost:9527/user/register', params).then(res => {
+        console.log(res)
       })
     }
   }
