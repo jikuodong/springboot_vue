@@ -46,7 +46,7 @@ public class UserController {
         // 只要一行代码就能实现登录
         try {
             subject.login(token);
-            return "登录成功";
+            return (String) subject.getSession().getId();
         }catch (UnknownAccountException e){ // 处理我们在Realm中抛出的异常
             return "用户不存在";
         } catch (AuthenticationException e) { // 当Shiro发现用户的账号密码不匹配时自动抛出这个异常

@@ -29,14 +29,15 @@
 </template>
 
 <script>
+import { post } from '@/utils/http'
 import axios from 'axios'
+import store from '../store'
 export default {
   name: 'Login',
   data () {
     return {
       username: '',
-      password: '',
-      input1: ''
+      password: ''
     }
   },
   created () {
@@ -44,15 +45,18 @@ export default {
   methods: {
     login () {
       var params = {
-        userName: this.username,
+        username: this.username,
         password: this.password
       }
       debugger
-      axios.post('http://localhost:9527/user/login', params).then(res => {
-        console.log(res)
-      }).catch(function (e) {
-        console.log(e)
-      })
+      this.$store.commit('setUserName', this.username)
+      console.log(store.state.username)
+      post('user/login', params).then(res => {
+        debugger
+        this.$store.commit('setUserToken', res) // 将返回的token存储在vuex中
+        console.log(store.state.setUserToken)
+        // this.$router.replace('/logout') // 路由跳转到登出界面
+      }).catch((e) => {})
     },
     register () {
       let params = {
