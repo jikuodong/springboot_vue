@@ -3,8 +3,13 @@ package com.jkd.springbootproject.controller;
 import com.jkd.springbootproject.mapper.UserMapper;
 import com.jkd.springbootproject.pojo.User;
 import com.jkd.springbootproject.service.UserService;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.SimpleHash;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,11 +40,18 @@ public class UserController {
 
     @PostMapping("/login")
     public String Login(@RequestBody User user){
-        User u = userMapper.selectUser(user);
-        if (u !=null ){
-            return "验证成功";
+        Subject subject = SecurityUtils.getSubject();
+        // Shiro帮我们写好了usernamePasswordToken，只要提交账号密码，后面的交给Realm,Realm交给SecurityManage
+        UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(),user.getPassword());
+        // 只要一行代码就能实现登录
+        try {
+            subject.login(token);
+            return "登录成功";
+        }catch (UnknownAccountException e){ // 处理我们在Realm中抛出的异常
+            return "用户不存在";
+        } catch (AuthenticationException e) { // 当Shiro发现用户的账号密码不匹配时自动抛出这个异常
+            return "账号或密码错误";
         }
-        return "登验证失败";
     }
 
     // 用户注册

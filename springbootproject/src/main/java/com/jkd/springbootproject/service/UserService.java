@@ -19,6 +19,9 @@ public class UserService {
     @Autowired
     private UserMapper userMapper;
 
+    /**
+     * 根据与户名和密码查询用户信息
+     */
     public boolean checkUser(User user){
         User u = userMapper.selectUser(user);
         if (u == null) {
@@ -28,6 +31,9 @@ public class UserService {
         return true;
     }
 
+    /**
+     * 根据用户查询用户信息
+     */
     public boolean isExist(String username){
         User user = userMapper.isExist(username);
         // 从数据库可以查找出用户
@@ -37,7 +43,19 @@ public class UserService {
         return false;
     }
 
+    /**
+     * 添加用户信息
+     */
     public void add(User user){
         userMapper.add(user);
+    }
+
+    /**
+     * 根据用户名查询用户信息
+     * @param username
+     * @return
+     */
+    public User getUserByName(String username){
+       return userMapper.isExist(username);
     }
 }
