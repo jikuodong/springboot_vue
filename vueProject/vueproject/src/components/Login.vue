@@ -31,7 +31,6 @@
 <script>
 import { post } from '@/utils/http'
 import axios from 'axios'
-import store from '../store'
 export default {
   name: 'Login',
   data () {
@@ -48,16 +47,14 @@ export default {
         username: this.username,
         password: this.password
       }
-      debugger
       this.$store.commit('setUserName', this.username)
-      console.log(store.state.username)
-      debugger
       post('user/login', params).then(res => {
-        debugger
-        this.$store.commit('setUserToken', res) // 将返回的token存储在vuex中
-        console.log(store.state.token)
-        this.$router.replace('/logout') // 路由跳转到登出界面
-      }).catch((e) => {})
+        // 将返回的token存储在vuex中
+        this.$store.commit('setUserToken', res.token)
+        this.$store.commit('setUserRole', res.rid)
+        // 路由跳转到登出界面
+        this.$router.replace('/admin')
+      })
     },
     register () {
       let params = {

@@ -15,9 +15,17 @@ const store = new Vuex.Store({
     setUserToken (state, token) {
       state.token = token
     },
+    setUserRole (state, role) {
+      state.rid = role
+    },
+    initAdminMenu (state, menu) {
+      state.adminMenus = menu
+    },
     logout (state, token) {
       state.username = null
       state.token = ''
+      state.rid = -1
+      state.adminMenus = []
       window.localStorage.removeItem('user')
     }
   }
