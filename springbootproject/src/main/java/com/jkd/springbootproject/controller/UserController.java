@@ -11,10 +11,7 @@ import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @projectName: springbootproject
@@ -52,6 +49,22 @@ public class UserController {
         } catch (AuthenticationException e) { // 当Shiro发现用户的账号密码不匹配时自动抛出这个异常
             return "账号或密码错误";
         }
+    }
+
+    @PostMapping("/logout")
+    public String logout() {
+        Subject subject = SecurityUtils.getSubject();
+        subject.logout();
+        return "登出成功";
+    }
+
+    @GetMapping("/getAuth")
+    public Integer isAuth() {
+        Subject subject = SecurityUtils.getSubject();
+        if (subject.isAuthenticated()) {
+            return 1;
+        }
+        return 0;
     }
 
     // 用户注册

@@ -91,7 +91,7 @@ axios.interceptors.response.use(
           break
         // 404 请求不存在
         case 404:
-          this.$message({
+          message({
             message: '网络请求不存在',
             duration: 1500,
             type: 'error'

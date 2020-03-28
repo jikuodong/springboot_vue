@@ -51,11 +51,12 @@ export default {
       debugger
       this.$store.commit('setUserName', this.username)
       console.log(store.state.username)
+      debugger
       post('user/login', params).then(res => {
         debugger
         this.$store.commit('setUserToken', res) // 将返回的token存储在vuex中
-        console.log(store.state.setUserToken)
-        // this.$router.replace('/logout') // 路由跳转到登出界面
+        console.log(store.state.token)
+        this.$router.replace('/logout') // 路由跳转到登出界面
       }).catch((e) => {})
     },
     register () {
