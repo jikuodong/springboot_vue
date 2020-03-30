@@ -58,4 +58,11 @@ public class UserService {
     public User getUserByName(String username){
        return userMapper.isExist(username);
     }
+
+    /**
+     * 根据昵称获取用户角色
+     */
+    public String getRid(String username){
+        return userMapper.getRid(username);
+    };
 }

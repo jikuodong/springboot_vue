@@ -22,10 +22,25 @@
 export default {
   data () {
     return {
+      isCollapse: false
+      // adminMenus: [
+      //   {
+      //     iconCls: 'el-icon-s-home',
+      //     nameZh: '首页',
+      //     children: [
+      //       {
+      //         icon: '',
+      //         nameZh: '首页1-1',
+      //         path: '/admin/user/Profile'
+      //       }
+      //     ]
+      //   }
+      // ]
     }
   },
   computed: {
     adminMenus () {
+      debugger
       return this.$store.state.adminMenus
     }
   }

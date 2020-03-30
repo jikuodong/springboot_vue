@@ -75,7 +75,6 @@ export default {
   .home_userinfoContainer {
     position: absolute;
     right: 0px;
-    padding:10px;
     display: inline;
     margin-right: 20px;
   }

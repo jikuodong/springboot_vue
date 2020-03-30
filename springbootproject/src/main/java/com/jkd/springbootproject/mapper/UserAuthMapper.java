@@ -24,7 +24,7 @@ public interface UserAuthMapper {
 
     List<Integer> getParentMenuId();
 
-    Menu getByPid(Integer id);
+    List<Menu> getByPid(Integer id);
 
 
 }

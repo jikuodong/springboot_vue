@@ -19,5 +19,7 @@ public interface UserMapper {
 
     User isExist(String username);
 
+    String getRid(String username);
+
     void add(User user);
 }

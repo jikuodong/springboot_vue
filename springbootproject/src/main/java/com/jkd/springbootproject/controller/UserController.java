@@ -11,7 +11,11 @@ import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.relational.core.sql.In;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @projectName: springbootproject
@@ -36,14 +40,20 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String Login(@RequestBody User user){
+    public Object Login(@RequestBody User user){
         Subject subject = SecurityUtils.getSubject();
+        System.out.println(subject);
         // Shiro帮我们写好了usernamePasswordToken，只要提交账号密码，后面的交给Realm,Realm交给SecurityManage
         UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(),user.getPassword());
+        System.out.println(token);
         // 只要一行代码就能实现登录
         try {
             subject.login(token);
-            return (String) subject.getSession().getId();
+            String rid = userService.getRid(user.getUsername());
+            Map<String, String> map = new HashMap<>();
+            map.put("token", (String) subject.getSession().getId());
+            map.put("rid", rid);
+            return map;
         }catch (UnknownAccountException e){ // 处理我们在Realm中抛出的异常
             return "用户不存在";
         } catch (AuthenticationException e) { // 当Shiro发现用户的账号密码不匹配时自动抛出这个异常

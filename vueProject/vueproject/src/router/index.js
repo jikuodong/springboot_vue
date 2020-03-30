@@ -2,10 +2,12 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/components/Login'
 import Logout from '@/components/Logout'
+import Admin from '@/components/admin/AdminIndex'
 
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/login',
@@ -21,6 +23,7 @@ export default new Router({
     {
       path: '/admin',
       name: 'admin',
+      component: Admin,
       redirect: '/admin/dashboard',
       children: [
         {

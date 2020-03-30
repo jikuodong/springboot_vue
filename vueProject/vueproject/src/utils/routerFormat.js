@@ -11,7 +11,7 @@ export function formatRoutes (routes) {
         require(['@/components/admin/' + routes.component + '.vue'], resolve)
       },
       name: routes.name,
-      nameZh: routes.name_zh,
+      nameZh: routes.nameZh,
       iconCls: routes.icon,
       children: routes.child
     }

@@ -11,7 +11,7 @@
  Target Server Version : 50528
  File Encoding         : 65001
 
- Date: 28/03/2020 17:06:26
+ Date: 30/03/2020 16:56:53
 */
 
 SET NAMES utf8mb4;
@@ -53,7 +53,13 @@ CREATE TABLE `role`  (
   `name` varchar(128) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '角色名',
   `name_zh` varchar(128) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '角色中文名',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '角色表' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '角色表' ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Records of role
+-- ----------------------------
+INSERT INTO `role` VALUES (1, 'admin', '管理员');
+INSERT INTO `role` VALUES (2, 'sb', '普通员工');
 
 -- ----------------------------
 -- Table structure for role_menu
@@ -64,7 +70,21 @@ CREATE TABLE `role_menu`  (
   `rid` int(10) NULL DEFAULT NULL COMMENT '角色id',
   `mid` int(10) NULL DEFAULT NULL COMMENT '菜单id',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '角色和菜单关系表' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '角色和菜单关系表' ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Records of role_menu
+-- ----------------------------
+INSERT INTO `role_menu` VALUES (1, 1, 1);
+INSERT INTO `role_menu` VALUES (2, 1, 2);
+INSERT INTO `role_menu` VALUES (3, 1, 3);
+INSERT INTO `role_menu` VALUES (4, 1, 4);
+INSERT INTO `role_menu` VALUES (5, 1, 5);
+INSERT INTO `role_menu` VALUES (6, 1, 6);
+INSERT INTO `role_menu` VALUES (7, 1, 7);
+INSERT INTO `role_menu` VALUES (8, 1, 8);
+INSERT INTO `role_menu` VALUES (9, 2, 1);
+INSERT INTO `role_menu` VALUES (10, 2, 2);
 
 -- ----------------------------
 -- Table structure for user
@@ -96,6 +116,12 @@ CREATE TABLE `user_role`  (
   `uid` int(10) NULL DEFAULT NULL COMMENT '用户id',
   `rid` int(10) NULL DEFAULT NULL COMMENT '角色id',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户与角色关系表' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户与角色关系表' ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Records of user_role
+-- ----------------------------
+INSERT INTO `user_role` VALUES (1, 4, 1);
+INSERT INTO `user_role` VALUES (2, 5, 2);
 
 SET FOREIGN_KEY_CHECKS = 1;

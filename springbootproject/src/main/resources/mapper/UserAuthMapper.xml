@@ -2,13 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jkd.springbootproject.mapper.UserAuthMapper">
+    <resultMap id="BaseResultMap" type="com.jkd.springbootproject.pojo.Menu" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="path" property="path" jdbcType="VARCHAR" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="name_zh" property="nameZh" jdbcType="VARCHAR" />
+        <result column="icon" property="icon" jdbcType="VARCHAR" />
+        <result column="component" property="component" jdbcType="VARCHAR" />
+        <result column="parent_id" property="parentId" jdbcType="INTEGER" />
+    </resultMap>
     <select id="searchRoleByUid" resultType="com.jkd.springbootproject.pojo.Role">
         select r.* from role r,user_role ur where ur.uid = #{uid} and ur.rid = r.id
     </select>
-    <select id="getUserMenu" resultType="com.jkd.springbootproject.pojo.Menu">
+    <select id="getUserMenu" resultMap="BaseResultMap">
         select m.* from menu m,role_menu rm where rm.rid = #{rid} and rm.mid = m.id
     </select>
-    <select id="getByParentId" resultType="com.jkd.springbootproject.pojo.Menu">
+    <select id="getByParentId" resultMap="BaseResultMap">
         select m.* from menu m,role_menu rm where m.parent_id = #{parentId} and rm.rid = #{rid} and m.id = rm.mid
     </select>
     <select id="getByPid" resultType="com.jkd.springbootproject.pojo.Menu">

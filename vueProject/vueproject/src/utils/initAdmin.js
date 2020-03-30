@@ -1,5 +1,5 @@
 import {get} from '@/utils/http'
-import {formatRoutes} from '@/utils/routerFormat'
+import {formatRoutes} from '../utils/routerFormat'
 export default function initAdminMenu (router, store) {
   if (store.state.adminMenus.length > 0) {
     return

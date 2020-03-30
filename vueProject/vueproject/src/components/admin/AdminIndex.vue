@@ -7,7 +7,7 @@
       </el-header>
       <el-container ref="homePage">
         <el-aside :width="sideWidth">
-          <side></side>
+          <Side></Side>
         </el-aside>
         <el-main>
           <router-view />
