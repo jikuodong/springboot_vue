@@ -29,6 +29,7 @@ public class FangShuaInterceptor extends HandlerInterceptorAdapter {
     @Resource
     private RedisTemplate<String, Integer> redisTemplate;
 
+    // 在访问Controller之前被调用
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         // 判断请求是否属于方法的请求
